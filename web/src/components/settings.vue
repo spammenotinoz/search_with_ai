@@ -34,7 +34,35 @@ export default {
 <template>
   <!-- eslint-disable-next-line vue/no-v-model-argument -->
   <t-drawer v-model:visible="showSettings" :footer="false" :header="t('settings')">
-      <div class="flex h-full flex-col justify-between gap-4">	    
+      <div class="flex h-full flex-col justify-between gap-4">
+	    div class="w-full">
+          <div class="flex w-full flex-col gap-2">
+            <div class="">{{ t('selectModel') }}</div>
+            <ModelSelect />
+          </div>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('selectEngine') }}</div>
+            <SearchEngineSelect />
+          </div>
+          <t-divider>{{ t('localModel') }}</t-divider>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('enableLocalModel') }}</div>
+            <t-switch class="w-12" size="large" :default-value="appStore.enableLocal" @change="onEnableLocalModel">
+              <template #label="slotProps">
+                <template v-if="slotProps.value">
+                  on
+                </template>
+                <template v-else>
+                  off
+                </template>
+              </template>
+            </t-switch>
+          </div>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('localModel') }}</div>
+            <LocalModelSelect />
+          </div>
+         </div>
         <div class="mb-4 flex flex-row gap-2">
           <span>{{ t('theme') }}: </span>
           <t-switch class="w-12" size="large" :default-value="appStore.theme === 'dark'" @change="onChangeTheme">
