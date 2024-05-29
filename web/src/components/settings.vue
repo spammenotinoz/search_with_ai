@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { ModelSelect, SearchEngineSelect, LocalModelSelect } from './';
+import { LocalModelSelect } from './';
 import { RiSunLine, RiMoonLine } from '@remixicon/vue';
 import { useAppStore } from '../store';
 import { type SwitchValue } from 'tdesign-vue-next';
@@ -21,8 +20,6 @@ const onEnableLocalModel = (val: SwitchValue) => {
   appStore.switchLocalModel(val as boolean);
 };
 
-const enableLocal = ref(appStore.enableLocal);
-
 </script>
 
 <script lang="ts">
@@ -36,15 +33,7 @@ export default {
   <t-drawer v-model:visible="showSettings" :footer="false" :header="t('settings')">
       <div class="flex h-full flex-col justify-between gap-4">
 	    div class="w-full">
-          <div class="flex w-full flex-col gap-2">
-            <div class="">{{ t('selectModel') }}</div>
-            <ModelSelect />
-          </div>
-          <div class="mt-2 flex w-full flex-col gap-2">
-            <div class="">{{ t('selectEngine') }}</div>
-            <SearchEngineSelect />
-          </div>
-          <t-divider>{{ t('localModel') }}</t-divider>
+           <t-divider>{{ t('localModel') }}</t-divider>
           <div class="mt-2 flex w-full flex-col gap-2">
             <div class="">{{ t('enableLocalModel') }}</div>
             <t-switch class="w-12" size="large" :default-value="appStore.enableLocal" @change="onEnableLocalModel">
