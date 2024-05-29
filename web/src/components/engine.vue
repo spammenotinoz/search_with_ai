@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { ISelectOptions } from '../interface';
-import { useAppStore } from '../store';
 import { useI18n } from 'vue-i18n';
-const appStore = useAppStore();
 
 const engines = ref<ISelectOptions[]>([]);
-const engine = ref(appStore.engine);
+
 const { t } = useI18n();
-const onSelect = (val: any) => {
-  appStore.updateEngine(val);
-};
 
 onMounted(() => {
   engines.value = [
@@ -41,7 +36,5 @@ export default {
 </script>
 
 <template>
-  <t-select  v-model="engine" :label="t('search')" :placeholder="t('selectEngine')" @change="onSelect">
-    <t-option v-for="item in engines" :key="item.value" :value="item.value" :label="item.name"></t-option>
-  </t-select>
+
 </template>
