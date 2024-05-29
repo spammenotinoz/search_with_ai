@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue';
 import { useAppStore } from './store';
 import { useI18n } from 'vue-i18n';
 import { AppSettings, ToolBar } from './components';
-
 const { t, locale } = useI18n();
 const appStore = useAppStore();
 

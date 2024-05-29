@@ -133,9 +133,6 @@ export default {
 
 <template>
   <div class="w-full">
-    <div v-if="!messages.length" class="w-full text-center text-zinc-500">
-      {{ t('tips.continue') }}
-    </div>
     <div class="mt-4 w-full">
       <div v-for="(message, index) in messages" :key="index" class="mt-4">
         <t-loading v-if="message.role === 'assistant' && !message.content" size="small" />

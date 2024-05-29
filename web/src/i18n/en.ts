@@ -1,5 +1,5 @@
 export default {
-  title: 'Search with AI',
+  title: 'Ultimate Search',
   theme: 'Theme',
   ask: 'Me',
   answer: 'Answer',
