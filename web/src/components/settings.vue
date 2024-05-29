@@ -16,9 +16,8 @@ const onChangeTheme = (val: SwitchValue) => {
 };
 
 const onEnableLocalModel = (val: SwitchValue) => {
-  appStore.switchLocalModel(val as boolean);
+    appStore.switchLocalModel(val as boolean);
 };
-
 </script>
 
 <script lang="ts">
@@ -31,10 +30,10 @@ export default {
   <!-- eslint-disable-next-line vue/no-v-model-argument -->
   <t-drawer v-model:visible="showSettings" :footer="false" :header="t('settings')">
       <div class="flex h-full flex-col justify-between gap-4">
-	    div class="w-full">
-           <t-divider>{{ t('localModel') }}</t-divider>
+	    <div class="w-full">
+           
           <div class="mt-2 flex w-full flex-col gap-2">
-            <div class="">{{ t('enableLocalModel') }}</div>
+           
             <t-switch class="w-12" size="large" :default-value="appStore.enableLocal" @change="onEnableLocalModel">
               <template #label="slotProps">
                 <template v-if="slotProps.value">
