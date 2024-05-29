@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { LocalModelSelect } from './';
 import { RiSunLine, RiMoonLine } from '@remixicon/vue';
 import { useAppStore } from '../store';
 import { type SwitchValue } from 'tdesign-vue-next';
@@ -35,6 +36,9 @@ export default {
            
             <t-switch class="w-12" size="large" :default-value="appStore.enableLocal" @change="onEnableLocalModel">
             </t-switch>
+          </div>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <LocalModelSelect />
           </div>
          </div>
         <div class="mb-4 flex flex-row gap-2">
