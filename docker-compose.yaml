@@ -7,7 +7,7 @@ services:
     volumes:
       - ./.env.docker:/app/.env
     ports:
-      - "3000:3000"
+      - "3005:3000"
     restart: always
 
   freeduckduckgo:

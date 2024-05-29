@@ -15,6 +15,9 @@ const onChangeTheme = (val: SwitchValue) => {
   else appStore.updateTheme('light');
 };
 
+const onEnableLocalModel = (val: SwitchValue) => {
+  appStore.switchLocalModel(val as boolean);
+};
 </script>
 
 <script lang="ts">
@@ -26,7 +29,9 @@ export default {
 <template>
   <!-- eslint-disable-next-line vue/no-v-model-argument -->
   <t-drawer v-model:visible="showSettings" :footer="false" :header="t('settings')">
-      <div class="flex h-full flex-col justify-between gap-4">
+    <div class="flex h-full flex-col justify-between gap-4">
+      <div class="w-full">
+
         <div class="mb-4 flex flex-row gap-2">
           <span>{{ t('theme') }}: </span>
           <t-switch class="w-12" size="large" :default-value="appStore.theme === 'dark'" @change="onChangeTheme">
@@ -41,5 +46,6 @@ export default {
           </t-switch>
         </div>
       </div>
-    </t-drawer>
+    </div>
+  </t-drawer>
 </template>
