@@ -16,11 +16,6 @@ const onChangeTheme = (val: SwitchValue) => {
   else appStore.updateTheme('light');
 };
 
-const onEnableLocalModel = (val: SwitchValue) => {
-  enableLocal.value = val as boolean;
-  appStore.switchLocalModel(val as boolean);
-};
-
 const enableLocal = ref(appStore.enableLocal);
 
 </script>
