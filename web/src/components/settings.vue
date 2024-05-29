@@ -35,9 +35,18 @@ export default {
           <div class="mt-2 flex w-full flex-col gap-2">
            
             <t-switch class="w-12" size="large" :default-value="appStore.enableLocal" @change="onEnableLocalModel">
+              <template #label="slotProps">
+                <template v-if="slotProps.value">
+                  on
+                </template>
+                <template v-else>
+                  off
+                </template>
+              </template>
             </t-switch>
           </div>
           <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('localModel') }}</div>
             <LocalModelSelect />
           </div>
          </div>
@@ -54,6 +63,5 @@ export default {
             </template>
           </t-switch>
         </div>
-    </div>
-  </t-drawer>
+    </t-drawer>
 </template>
