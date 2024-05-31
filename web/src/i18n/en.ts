@@ -19,7 +19,7 @@ export default {
   chat: 'Continue Q&A',
   back: 'Back Home',
   language: 'Language',
-  settings: 'Settings',
+  settings: 'Ultimate AI',
   selectModel: 'Select LLM',
   selectLanguage: 'Select Language',
   selectEngine: 'Select Search Engine',

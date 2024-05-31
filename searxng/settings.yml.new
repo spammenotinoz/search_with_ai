@@ -84,7 +84,7 @@ server:
   # If your instance owns a /etc/searxng/settings.yml file, then set the following
   # values there.
 
-  secret_key: "6ad06405d0e28c84acd82593225781fa7d9523c91f52412c2a156591c3ad7600"  # Is overwritten by ${SEARXNG_SECRET}
+  secret_key: "73fa8579e1c6a35fa348a6da703e563bbc80d832e5cbe3d63688e71adbd9a28b"  # Is overwritten by ${SEARXNG_SECRET}
   # Proxying image results through searx
   image_proxy: false
   # 1.0 and 1.1 are supported
@@ -220,7 +220,7 @@ outgoing:
 #   - 'Ahmia blacklist'  # activation depends on outgoing.using_tor_proxy
 #   # these plugins are disabled if nothing is configured ..
 #   - 'Hostname replace'  # see hostname_replace configuration below
-#   - 'Calculator plugin'
+#   - 'Basic Calculator'
 #   - 'Open Access DOI rewrite'
 #   - 'Tor check plugin'
 #   # Read the docs before activate: auto-detection of the language could be
@@ -727,6 +727,11 @@ engines:
     shortcut: fd
     disabled: true
 
+  - name: findthatmeme
+    engine: findthatmeme
+    shortcut: ftm
+    disabled: true
+
   - name: flickr
     categories: images
     shortcut: fl
@@ -923,6 +928,9 @@ engines:
     engine: hex
     shortcut: hex
     disabled: true
+    # Valid values: name inserted_at updated_at total_downloads recent_downloads
+    sort_criteria: "recent_downloads"
+    page_size: 10
 
   - name: crates.io
     engine: crates
