@@ -55,6 +55,14 @@ export default {
 			<span> AI Music</span>
           </a>
         </div>
+		
+		<div class="mb-4 flex flex-row gap-2">
+			<a href="https://ultimateai.org/docs" target="_blank">
+				<Icon icon="material-symbols:help-outline-rounded" width="24" height="24" />
+				<span> Documentation</span>
+			</a>	
+		</div>
+		
         <div class="mb-4 flex flex-row gap-2">
           <span>{{ t('theme') }}: </span>
           <t-switch class="w-12" size="large" :default-value="appStore.theme === 'dark'" @change="onChangeTheme">
