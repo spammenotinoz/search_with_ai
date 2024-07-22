@@ -1,17 +1,15 @@
 FROM node:18 AS build
 
+COPY . /app
+
+# RUN yarn config set registry https://mirrors.cloud.tencent.com/npm/
+RUN yarn config set registry https://registry.npmmirror.com
+
 WORKDIR /app
-
-COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-
-COPY . .
-RUN yarn run build
+RUN yarn install && yarn run build
 
 WORKDIR /app/web
-COPY web/package.json web/yarn.lock ./
-RUN yarn install --frozen-lockfile
-RUN yarn run build
+RUN yarn install && yarn run build
 
 FROM node:18-alpine
 WORKDIR /app
