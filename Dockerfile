@@ -11,6 +11,7 @@ WORKDIR /app
 RUN yarn install && yarn run build
 
 WORKDIR /app/web
+RUN yarn config set registry https://registry.npmjs.org
 RUN yarn install && yarn run build
 
 FROM node:18-alpine
@@ -26,6 +27,7 @@ COPY --from=build /app/backend ./backend
 COPY --from=build /app/web/build ./web/build
 COPY --from=build /app/package.json ./
 
+RUN yarn config set registry https://registry.npmjs.org
 RUN yarn install --production && yarn cache clean
 
 EXPOSE 3000
