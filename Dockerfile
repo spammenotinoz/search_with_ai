@@ -1,9 +1,10 @@
 FROM node:18 AS build
+RUN yarn config set registry https://registry.npmmirror.com
 
 COPY . /app
 
 #RUN yarn config set registry https://mirrors.cloud.tencent.com/npm/
-#RUN yarn config set registry https://registry.npmmirror.com
+
 
 WORKDIR /app
 RUN yarn install && yarn run build
