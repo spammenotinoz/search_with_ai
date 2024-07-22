@@ -25,6 +25,7 @@ COPY --from=build /app/web/build ./web/build
 COPY --from=build /app/package.json ./
 
 # RUN yarn config set registry https://mirrors.cloud.tencent.com/npm/
+RUN yarn config set registry https://registry.npmmirror.com
 RUN yarn install --production && yarn cache clean
 
 EXPOSE 3000
