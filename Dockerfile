@@ -1,5 +1,6 @@
 FROM node:18 AS build
-RUN yarn config set registry https://registry.npmmirror.com
+RUN yarn config set registry https://registry.npmjs.org
+#https://registry.npmmirror.com
 
 COPY . /app
 
