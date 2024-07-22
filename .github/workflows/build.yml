@@ -60,7 +60,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: spammenotinoz/search-with-ai
+          images: spammenotinoz/search_with_ai
           tags: |
             type=raw,value=latest
             type=ref,event=branch
