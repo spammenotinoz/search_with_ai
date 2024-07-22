@@ -27,7 +27,13 @@ jobs:
       - name: Install dependencies and regenerate yarn.lock
         run: yarn install
 
+      - name: Check for changes in yarn.lock
+        id: yarn-lock
+        run: |
+          git diff --exit-code yarn.lock || echo "changes=true" >> $GITHUB_OUTPUT
+
       - name: Commit and push updated yarn.lock
+        if: steps.yarn-lock.outputs.changes == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
