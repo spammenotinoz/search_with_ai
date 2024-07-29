@@ -1,94 +1,35 @@
-name: Publish Docker image
+name: Build and Deploy
 
 on:
   push:
-    branches:
-      - '**'  # Trigger the workflow on push events to all branches
-  workflow_dispatch:  # Allows manual triggering of the workflow
-  release:
-    types: [published]  # Triggers the workflow when a release is published
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  update_yarn_lock:
-    name: Update yarn.lock
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+    - name: Use Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
 
-      - name: Remove existing yarn.lock
-        run: rm -f yarn.lock
+    - name: Cache npm dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.npm
+        key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.OS }}-node-
 
-      - name: Install dependencies and regenerate yarn.lock
-        run: yarn install
+    - name: Install dependencies
+      run: yarn install
 
-      - name: Check for changes in yarn.lock
-        id: yarn-lock
-        run: |
-          git diff --exit-code yarn.lock || echo "changes=true" >> $GITHUB_OUTPUT
+    - name: Build
+      run: docker build -t your-image-name .
 
-      - name: Commit and push updated yarn.lock
-        if: steps.yarn-lock.outputs.changes == 'true'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add yarn.lock
-          git commit -m "Update yarn.lock"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  push_to_registry:
-    name: Push Docker image to Docker Hub
-    runs-on: ubuntu-latest
-    needs: update_yarn_lock
-    steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-
-      - run: |
-          echo "Current branch: ${{ github.ref_name }}"
-          echo "Docker username: ${{ secrets.DOCKER_USERNAME }}"
-          env
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@v4
-        with:
-          images: spammenotinoz/search_with_ai
-          tags: |
-            type=raw,value=latest
-            type=ref,event=branch
-            type=ref,event=pr
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-          cache-from: ${{ inputs.use-cache == 'true' && 'type=gha' || 'type=local,src=/tmp' }}
-          cache-to: ${{ inputs.use-cache == 'true' && 'type=gha, mode=max' || 'type=local,dest=/tmp' }}
+    # Add additional steps for testing and deployment as needed
