@@ -1,14 +1,18 @@
 FROM node:18 AS build
-RUN npm config set registry https://registry.npmjs.org
+RUN yarn config set registry https://registry.npmjs.org
+#https://registry.npmmirror.com
 
 COPY . /app
 
+#RUN yarn config set registry https://mirrors.cloud.tencent.com/npm/
+
+
 WORKDIR /app
-RUN npm install && npm run build
+RUN yarn install && yarn run build
 
 WORKDIR /app/web
-RUN npm config set registry https://registry.npmjs.org
-RUN npm install && npm run build
+RUN yarn config set registry https://registry.npmjs.org
+RUN yarn install && yarn run build
 
 FROM node:18-alpine
 WORKDIR /app
@@ -23,8 +27,8 @@ COPY --from=build /app/backend ./backend
 COPY --from=build /app/web/build ./web/build
 COPY --from=build /app/package.json ./
 
-RUN npm config set registry https://registry.npmjs.org
-RUN npm install --production && npm cache clean --force
+RUN yarn config set registry https://registry.npmjs.org
+RUN yarn install --production && yarn cache clean
 
 EXPOSE 3000
-CMD npm start
+CMD yarn run start
