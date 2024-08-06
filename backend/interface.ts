@@ -45,4 +45,4 @@ export interface ISearchResponseResult {
   [key: string]: string | undefined;
 }
 
-export type TMode = 'simple' | 'deep' | 'research'
+export type TMode = 'simple' | 'deep'
