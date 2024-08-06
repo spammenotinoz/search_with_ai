@@ -4,7 +4,6 @@
       <div class="flex items-center justify-center gap-2">
         <img :src="logoUrl" class="w-10" />
         <span class="text-3xl font-bold dark:text-gray-100">Ultimate Search</span>
-        <t-tag variant="light" class="text-xs text-gray-500">beta</t-tag>
       </div>
       <SearchInputBar :autofocus="true" :loading="false" @search="search" />
       <div class="my-2 flex flex-wrap items-center justify-center gap-4">
