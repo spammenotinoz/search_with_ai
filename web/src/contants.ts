@@ -37,10 +37,5 @@ export const SearchMode = [
   {
     name: 'deep',
     displayName: 'mode.deep'
-  },
-  {
-    name: 'research',
-    displayName: 'mode.research',
-    disabled: true
   }
 ];
