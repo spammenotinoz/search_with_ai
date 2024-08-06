@@ -30,6 +30,6 @@ jobs:
       run: yarn install
 
     - name: Build
-      run: docker build -t your-image-name .
+      run: docker build -t search-with-ai .
 
     # Add additional steps for testing and deployment as needed
