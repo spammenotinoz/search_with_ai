@@ -40,6 +40,6 @@ jobs:
       with:
         context: .
         push: true
-        tags: yourdockerhubusername/search-with-ai:latest
+        tags: spammenotinoz/search-with-ai:latest
 
     # Add additional steps for testing and deployment as needed
