@@ -54,9 +54,12 @@ const quickly: Record<string, string[]> = {
     '《庆余年2》什么时候播出？'
   ],
   en: [
-    'What is LLM?',
-    'What is RAG?',
-    'How to use LLM in enterprise?'
+    'Summarize the key arguments for and against artificial intelligence development, citing recent academic sources',
+    'Compare and contrast the economic policies of the current Australian government with those of the previous administration, focusing on their impact on small businesses in New South Wales',
+	'Analyze the environmental impact of electric vehicles versus traditional combustion engines, considering the entire lifecycle from production to disposal',
+    'Create a week-long meal plan for a vegan athlete training for a marathon, including nutritional information and recipe suggestions',
+	'What are the latest breakthroughs in renewable energy technology, and how might they affect Australia's energy policy in the next decade?',
+	'Provide a critical review of the latest Joe Rogan podcast'
   ]
 };
 
