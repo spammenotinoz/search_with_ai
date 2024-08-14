@@ -5,6 +5,7 @@ import { BaseChat } from './base';
 export class BaseOpenAIChat implements BaseChat {
   private openai: OpenAI | null;
   public platform: string;
+  private readonly defaultModel: string = 'gpt-4o-mini';
 
   constructor(platform: string, apiKey?: string, baseURL?: string) {
     this.platform = platform;
@@ -18,7 +19,7 @@ export class BaseOpenAIChat implements BaseChat {
 
   public async chat(
     messages: IChatInputMessage[],
-    model: string,
+    model: string = this.defaultModel,
     system?: string
   ) {
     if (!this.openai) {
@@ -35,7 +36,7 @@ export class BaseOpenAIChat implements BaseChat {
     }
     const res = await this.openai.chat.completions.create({
       messages,
-      model
+      model: this.defaultModel
     });
     return res.choices[0]?.message.content;
   }
@@ -43,7 +44,7 @@ export class BaseOpenAIChat implements BaseChat {
   public async chatStream(
     messages: IChatInputMessage[],
     onMessage: IStreamHandler,
-    model: string,
+    model: string = this.defaultModel,
     system?: string
   ) {
     if (!this.openai) {
@@ -60,7 +61,7 @@ export class BaseOpenAIChat implements BaseChat {
     }
     const stream = await this.openai.chat.completions.create({
       messages,
-      model,
+      model: this.defaultModel,
       stream: true
     });
     for await (const chunk of stream) {
