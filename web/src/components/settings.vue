@@ -38,7 +38,7 @@ export default {
             <Icon icon="mdi:chat-outline" width="24" height="24" />
 			<span> Smart Chat </span>
           </a>
-          <a href="https://new.ultimateai.org" target="_blank">
+          <a href="https://chat.ultimateai.org" target="_blank">
             <Icon icon="mdi:chat" width="24" height="24" />
 			<span> Ultimate Chat </span>
           </a>
