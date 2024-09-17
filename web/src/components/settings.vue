@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { ModelSelect, SearchEngineSelect, LocalModelSelect, LanguageSelect } from './';
+import { ModelSelect, SearchEngineSelect, LocalModelSelect, LocalProviderSelect, LanguageSelect } from './';
 import { RiSunLine, RiMoonLine } from '@remixicon/vue';
 import { useAppStore } from '../store';
 import { type SwitchValue } from 'tdesign-vue-next';
 import { useI18n } from 'vue-i18n';
-import { Icon } from '@iconify/vue';
 
 const appStore = useAppStore();
 
@@ -16,6 +15,10 @@ const onChangeTheme = (val: SwitchValue) => {
   if (val) appStore.updateTheme('dark');
   else appStore.updateTheme('light');
 };
+
+const onEnableLocalModel = (val: SwitchValue) => {
+  appStore.switchLocalModel(val as boolean);
+};
 </script>
 
 <script lang="ts">
@@ -25,48 +28,45 @@ export default {
 </script>
 
 <template>
-<ModelSelect />
-<SearchEngineSelect />
-<LocalModelSelect />
-<LanguageSelect />
-
   <!-- eslint-disable-next-line vue/no-v-model-argument -->
   <t-drawer v-model:visible="showSettings" :footer="false" :header="t('settings')">
       <div class="flex h-full flex-col justify-between gap-4">
-        <div class="mb-4 flex flex-col gap-2">
-          <a href="https://smart.ultimateai.org" target="_blank">
-            <Icon icon="mdi:chat-outline" width="24" height="24" />
-			<span> Smart Chat </span>
-          </a>
-          <a href="https://chat.ultimateai.org" target="_blank">
-            <Icon icon="mdi:chat" width="24" height="24" />
-			<span> Ultimate Chat </span>
-          </a>
-          <a href="https://gpt.ultimateai.org" target="_blank">
-            <Icon icon="simple-icons:openai" width="24" height="24" />
-			<span> Chat GPT Plus </span>
-          </a>
-		  <a href="https://flux.ultimateai.org/#/music/index" target="_blank">
-            <Icon icon="mdi:palette-outline" width="24" height="24" />
-			<span>Flux: AI Image Generation </span>
-          </a>
-          <a href="https://studio.ultimateai.org/#/draw/1002" target="_blank">
-            <Icon icon="logos:midjourney" width="24" height="24" />
-			<span> Midjourney </span>
-          </a>
-          <a href="https://studio.ultimateai.org/#/music/index" target="_blank">
-            <Icon icon="mdi:music" width="24" height="24" />
-			<span> AI Music and Video </span>
-          </a>
+        <div class="w-full">
+          <div class="flex w-full flex-col gap-2">
+            <div class="">{{ t('selectModel') }}</div>
+            <ModelSelect />
+          </div>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('selectEngine') }}</div>
+            <SearchEngineSelect />
+          </div>
+          <t-divider>{{ t('localModel') }}</t-divider>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('enableLocalModel') }}</div>
+            <t-switch class="w-12" size="large" :default-value="appStore.enableLocal" @change="onEnableLocalModel">
+              <template #label="slotProps">
+                <template v-if="slotProps.value">
+                  on
+                </template>
+                <template v-else>
+                  off
+                </template>
+              </template>
+            </t-switch>
+          </div>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('localProvider') }}</div>
+            <LocalProviderSelect />
+          </div>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <div class="">{{ t('localModel') }}</div>
+            <LocalModelSelect />
+          </div>
+          <t-divider>{{ t('language') }}</t-divider>
+          <div class="mt-2 flex w-full flex-col gap-2">
+            <LanguageSelect />
+          </div>
         </div>
-		
-		<div class="mb-4 flex flex-row gap-2">
-			<a href="https://ultimateai.org/docs" target="_blank">
-				<Icon icon="material-symbols:help-outline-rounded" width="24" height="24" />
-				<span> Documentation</span>
-			</a>	
-		</div>
-		
         <div class="mb-4 flex flex-row gap-2">
           <span>{{ t('theme') }}: </span>
           <t-switch class="w-12" size="large" :default-value="appStore.theme === 'dark'" @change="onChangeTheme">

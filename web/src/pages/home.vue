@@ -3,7 +3,8 @@
     <div class="mt-36 flex w-full flex-col gap-4 p-4 sm:-mt-28 lg:max-w-3xl xl:max-w-4xl">
       <div class="flex items-center justify-center gap-2">
         <img :src="logoUrl" class="w-10" />
-        <span class="text-3xl font-bold dark:text-gray-100">Ultimate Search</span>
+        <span class="text-3xl font-bold dark:text-gray-100">AI Search</span>
+        <t-tag variant="light" class="text-xs text-gray-500">beta</t-tag>
       </div>
       <SearchInputBar :autofocus="true" :loading="false" @search="search" />
       <div class="my-2 flex flex-wrap items-center justify-center gap-4">
@@ -47,18 +48,21 @@ const enableAdvanced = computed(() => appStore.engine === 'SEARXNG');
 
 const quickly: Record<string, string[]> = {
   zh: [
-    '什么是大语言模型LLM?',
+    '刘亦菲《玫瑰的故事》',
     '怎么使用Ollama在本地部署大模型?',
     'llama3-70b需要什么硬件配置？',
     '小米su7体验怎么样？',
-    '《庆余年2》什么时候播出？'
+    '《庆余年2》大结局'
   ],
   en: [
-    'Summarize the key arguments for and against artificial intelligence development, citing recent academic sources',
-    'Compare and contrast the economic policies of the current Australian government with those of the previous administration, focusing on their impact on small businesses in New South Wales',
-	'Analyze the environmental impact of electric vehicles versus traditional combustion engines, considering the entire lifecycle from production to disposal',
-    'Create a week-long meal plan for a vegan athlete training for a marathon, including nutritional information and recipe suggestions',
-	'Provide a critical review of the latest Joe Rogan podcast'
+    'What is LLM?',
+    'What is RAG?',
+    'How to use LLM in enterprise?'
+  ],
+  ptBR: [
+    "O que é LLM?",
+    "O que é RAG?",
+    "Como utilizar LLM em empresas?"
   ]
 };
 

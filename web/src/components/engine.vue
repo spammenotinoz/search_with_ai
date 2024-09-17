@@ -9,9 +9,13 @@ const { t } = useI18n();
 
 onMounted(() => {
   engines.value = [
-  {
+    {
       name: t('searxng'),
       value: 'SEARXNG'
+    },
+    {
+      name: t('chatglm'),
+      value: 'CHATGLM'
     },
     {
       name: t('google'),
@@ -24,7 +28,8 @@ onMounted(() => {
     {
       name: t('sogou'),
       value: 'SOGOU'
-    }
+    },
+    
   ];
 });
 </script>
