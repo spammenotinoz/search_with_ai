@@ -60,10 +60,5 @@ export const Models: IModelInfo[] = [
     platform: 'chatglm',
     type: 'openai',
     models: ['glm-4', 'glm-4-plus', 'glm-4-air', 'glm-4-airx', 'glm-4-flash']
-  },
-  {
-    platform: 'tencent',
-    type: 'tencent',
-    models: ['std', 'pro']
   }
 ];
